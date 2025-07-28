@@ -1,0 +1,146 @@
+# 🤖 iFlow CLI
+![iFlow CLI Screenshot](./assets/iflow-cli.jpg)
+
+[English](README.md) | [中文](README_CN.md) | [日本語](README_JA.md) | [한국어](README_KO.md) | [Français](README_FR.md) | **Deutsch** | [Español](README_ES.md) | [Русский](README_RU.md)
+
+iFlow CLI ist ein leistungsstarker KI-Assistent, der direkt in Ihrem Terminal läuft. Er analysiert nahtlos Code-Repositories, führt Programmieraufgaben aus, versteht kontextspezifische Anforderungen und steigert die Produktivität durch Automatisierung - von einfachen Dateioperationen bis hin zu komplexen Workflows.
+
+## ✨ Hauptfunktionen
+
+1. **Kostenlose KI-Modelle**: Zugang zu leistungsstarken und kostenlosen KI-Modellen über die [iFlow Open Platform](https://docs.iflow.cn/en/docs), einschließlich Kimi K2, Qwen3 Coder, DeepSeek v3 und mehr
+2. **Flexible Integration**: Vollständige Unterstützung für OpenAI-Protokoll-Modellanbieter
+3. **Intuitive Benutzeroberfläche**: Optimierte Terminal-Erfahrung mit kontextbewusster Unterstützung
+4. **Sofort einsatzbereiter Assistent**: Vorkonfigurierte MCP-Server und spezialisierte Agenten, die zusammenarbeiten, um komplexe Probleme direkt nach der Installation zu lösen
+
+## 📥 Installation
+
+```shell
+bash -c "$(curl -fsSL https://cloud.iflow.cn/iflow-cli/install.sh)"
+```
+
+Dieser Befehl installiert automatisch alle notwendigen Abhängigkeiten für Ihr Terminal.
+
+**Windows-Nutzer**: Starten Sie zuerst `bash` in Ihrem Terminal und führen Sie dann das obige Installationsskript aus.
+
+## 🔑 Authentifizierung
+
+iFlow bietet zwei Authentifizierungsoptionen:
+
+1. **Empfohlen**: Verwenden Sie iFlows native Authentifizierung
+2. **Alternative**: Verbindung über OpenAI-kompatible APIs
+
+![iFlow CLI Login](./assets/login.jpg)
+
+So erhalten Sie Ihren API-Schlüssel:
+1. Registrieren Sie sich für ein iFlow-Konto
+2. Gehen Sie zu Ihren Profileinstellungen oder klicken Sie auf [diesen direkten Link](https://iflow.cn/?open=setting)
+3. Klicken Sie im Pop-up-Dialog auf "Zurücksetzen", um einen neuen API-Schlüssel zu generieren
+
+![iFlow Profile Settings](./assets/profile-settings.jpg)
+
+Nach der Generierung Ihres Schlüssels fügen Sie ihn in die Terminal-Eingabeaufforderung ein, um die Einrichtung abzuschließen.
+
+## 🚀 Erste Schritte
+
+Um iFlow CLI zu starten, navigieren Sie in Ihrem Terminal zu Ihrem Arbeitsbereich und geben Sie ein:
+
+```shell
+iflow
+```
+
+### Neue Projekte starten
+
+Für neue Projekte beschreiben Sie einfach, was Sie erstellen möchten:
+
+```shell
+cd neues-projekt/
+iflow
+> Erstelle ein webbasiertes Minecraft-Spiel mit HTML
+```
+
+### Mit bestehenden Projekten arbeiten
+
+Für bestehende Codebasen beginnen Sie mit dem `/init`-Befehl, um iFlow dabei zu helfen, Ihr Projekt zu verstehen:
+
+```shell
+cd projekt1/
+iflow
+> /init
+> Analysiere die Anforderungen gemäß dem PRD-Dokument in der requirement.md-Datei und erstelle ein technisches Dokument, dann implementiere die Lösung.
+```
+
+Der `/init`-Befehl scannt Ihre Codebasis, lernt deren Struktur und erstellt eine IFLOW.md-Datei mit umfassender Dokumentation.
+
+Eine vollständige Liste der Slash-Befehle und Nutzungsanweisungen finden Sie [hier](./i18/en/commands.md).
+
+## 💡 Häufige Anwendungsfälle
+
+iFlow CLI geht über das Programmieren hinaus und bewältigt eine Vielzahl von Aufgaben:
+
+### 📊 Information & Planung
+
+```text
+> Hilf mir dabei, die bestbewerteten Restaurants in Los Angeles zu finden und eine 3-tägige Food-Tour-Route zu erstellen.
+```
+
+```text
+> Suche nach den neuesten iPhone-Preisvergleichen und finde die kostengünstigste Kaufoption.
+```
+
+### 📁 Dateiverwaltung
+
+```text
+> Organisiere die Dateien auf meinem Desktop nach Dateityp in separate Ordner.
+```
+
+```text
+> Lade alle Bilder von dieser Webseite im Batch herunter und benenne sie nach Datum um.
+```
+
+### 📈 Datenanalyse
+
+```text
+> Analysiere die Verkaufsdaten in dieser Excel-Tabelle und erstelle ein einfaches Diagramm.
+```
+
+```text
+> Extrahiere Kundeninformationen aus diesen CSV-Dateien und führe sie in einer einheitlichen Tabelle zusammen.
+```
+
+### 👨‍💻 Entwicklungsunterstützung
+
+```text
+> Analysiere die Hauptarchitekturkomponenten und Modulabhängigkeiten dieses Systems.
+```
+
+```text
+> Ich bekomme eine Null-Pointer-Exception nach meiner Anfrage, bitte hilf mir, die Ursache des Problems zu finden.
+```
+
+### ⚙️ Workflow-Automatisierung
+
+```text
+> Erstelle ein Skript, um meine wichtigen Dateien regelmäßig in den Cloud-Speicher zu sichern.
+```
+
+```text
+> Schreibe ein Programm, das täglich Aktienkurse herunterlädt und mir E-Mail-Benachrichtigungen sendet.
+```
+
+*Hinweis: Erweiterte Automatisierungsaufgaben können MCP-Server nutzen, um Ihre lokalen Systemtools mit Unternehmens-Kollaborationssuiten zu integrieren.*
+
+## 🔧 Zu einem benutzerdefinierten Modell wechseln
+
+iFlow CLI kann sich mit jeder OpenAI-kompatiblen API verbinden. Bearbeiten Sie die Einstellungsdatei in `~/.iflow/settings.json`, um das von Ihnen verwendete Modell zu ändern.
+
+Hier ist eine Beispiel-Einstellungsdatei:
+```json
+{
+    "theme": "Default",
+    "selectedAuthType": "iflow",
+    "apiKey": "ihr iflow schlüssel",
+    "baseUrl": "https://apis.iflow.cn/v1",
+    "modelName": "Qwen3-Coder",
+    "searchApiKey": "ihr iflow schlüssel"
+}
+```
