@@ -70,7 +70,7 @@ clean_npmrc_conflict() {
 
 # Download nvm offline package
 download_nvm_offline() {
-    local VERSION=${1:-v0.39.3}
+    local VERSION=${1:-v0.40.3}
     local REPO="nvm-sh/nvm"
     local OUT_DIR=${2:-"/tmp/nvm-offline-${VERSION}"}
     local RAW="https://raw.githubusercontent.com/${REPO}/${VERSION}"
@@ -108,7 +108,7 @@ download_nvm_offline() {
 # Install nvm
 install_nvm() {
     local NVM_DIR="${NVM_DIR:-$HOME/.nvm}"
-    local NVM_VERSION="${NVM_VERSION:-v0.39.3}"
+    local NVM_VERSION="${NVM_VERSION:-v0.40.3}"
     local TMP_OFFLINE_DIR="/tmp/nvm-offline-${NVM_VERSION}"
     
     if [ -s "$NVM_DIR/nvm.sh" ]; then
@@ -389,7 +389,7 @@ EOF
 
 # Install iFlow CLI
 install_iFlow_cli() {
-    local package_url="https://cloud.iflow.cn/iflow-cli/iflow-iflow-cli-0.0.2.tgz"
+    local package_url="https://cloud.iflow.cn/iflow-cli/iflow-iflow-cli-0.1.2.tgz"
     
     log_info "Installing iFlow CLI..."
     
