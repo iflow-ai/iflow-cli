@@ -144,3 +144,7 @@ Here is a settings demo file:
     "searchApiKey": "your iflow key"
 }
 ```
+
+## GitHub Actions
+
+You can also use iFlow CLI in your GitHub Actions workflows with the community-maintained action: [iflow-cli-action](https://github.com/vibe-ideas/iflow-cli-action)
