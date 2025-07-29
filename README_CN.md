@@ -14,6 +14,14 @@ iFlow CLI 是一款直接在终端中运行的强大 AI 助手。它能够无缝
 
 ## 📥 安装
 
+### 系统要求
+- 操作系统：macOS 10.15+、Ubuntu 20.04+/Debian 10+，或 Windows 10+（使用 WSL 1、WSL 2 或 Git for Windows）
+- 硬件：4GB+ 内存
+- 软件：Node.js 18+
+- 网络：需要互联网连接用于身份验证和 AI 处理
+- Shell：在 Bash、Zsh 或 Fish 中效果最佳
+
+### 安装命令
 ```shell
 bash -c "$(curl -fsSL https://cloud.iflow.cn/iflow-cli/install.sh)"
 ```
@@ -21,9 +29,6 @@ bash -c "$(curl -fsSL https://cloud.iflow.cn/iflow-cli/install.sh)"
 此命令会自动为您的终端安装所有必要的依赖项。
 
 **Windows 用户**：请先在终端中启动 `bash`，然后运行上述安装脚本。
-```shell
-> bash
-```
 
 ## 🔑 身份验证
 

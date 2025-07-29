@@ -14,6 +14,14 @@ iFlow CLI es un potente asistente de IA que funciona directamente en tu terminal
 
 ## 📥 Instalación
 
+### Requisitos del Sistema
+- Sistemas Operativos: macOS 10.15+, Ubuntu 20.04+/Debian 10+, o Windows 10+ (con WSL 1, WSL 2, o Git for Windows)
+- Hardware: 4GB+ de RAM
+- Software: Node.js 18+
+- Red: Conexión a Internet requerida para autenticación y procesamiento de IA
+- Shell: Funciona mejor en Bash, Zsh o Fish
+
+### Comando de instalación
 ```shell
 bash -c "$(curl -fsSL https://cloud.iflow.cn/iflow-cli/install.sh)"
 ```

@@ -14,6 +14,14 @@ iFlow CLI는 터미널에서 직접 실행되는 강력한 AI 어시스턴트입
 
 ## 📥 설치
 
+### 시스템 요구사항
+- 운영 체제: macOS 10.15+, Ubuntu 20.04+/Debian 10+, 또는 Windows 10+ (WSL 1, WSL 2, 또는 Git for Windows 사용)
+- 하드웨어: 4GB+ RAM
+- 소프트웨어: Node.js 18+
+- 네트워크: 인증 및 AI 처리를 위한 인터넷 연결 필요
+- 셸: Bash, Zsh 또는 Fish에서 최적으로 작동
+
+### 설치 명령어
 ```shell
 bash -c "$(curl -fsSL https://cloud.iflow.cn/iflow-cli/install.sh)"
 ```

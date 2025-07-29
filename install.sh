@@ -283,10 +283,10 @@ check_node_version() {
     local major_version=$(echo $current_version | cut -d. -f1)
     
     if [ "$major_version" -ge 20 ]; then
-        log_success "Node.js v$current_version is already installed (>= 18)"
+        log_success "Node.js v$current_version is already installed (>= 20)"
         return 0
     else
-        log_warning "Node.js v$current_version is installed but version < 18"
+        log_warning "Node.js v$current_version is installed but version < 20"
         return 1
     fi
 }
