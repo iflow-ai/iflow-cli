@@ -21,6 +21,9 @@ bash -c "$(curl -fsSL https://cloud.iflow.cn/iflow-cli/install.sh)"
 此命令会自动为您的终端安装所有必要的依赖项。
 
 **Windows 用户**：请先在终端中启动 `bash`，然后运行上述安装脚本。
+```shell
+> bash
+```
 
 ## 🔑 身份验证
 
