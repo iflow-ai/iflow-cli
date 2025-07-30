@@ -152,3 +152,7 @@ iFlow CLI 可以连接任何兼容 OpenAI 的 API。编辑 `~/.iflow/settings.js
     "searchApiKey": "your iflow key"
 }
 ```
+
+## GitHub Actions
+
+您也可以在 GitHub Actions 工作流中使用社区维护的 action：[iflow-cli-action](https://github.com/vibe-ideas/iflow-cli-action)

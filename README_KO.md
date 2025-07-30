@@ -152,3 +152,7 @@ iFlow CLI는 OpenAI 호환 API에 연결할 수 있습니다. `~/.iflow/settings
     "searchApiKey": "your iflow key"
 }
 ```
+
+## GitHub Actions
+
+GitHub Actions 워크플로우에서도 iFlow CLI를 커뮤니티가 유지보수하는 액션으로 사용할 수 있습니다: [iflow-cli-action](https://github.com/vibe-ideas/iflow-cli-action)

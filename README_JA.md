@@ -152,3 +152,7 @@ iFlow CLIは任意のOpenAI互換APIに接続できます。使用するモデ�
     "searchApiKey": "あなたのiflowキー"
 }
 ```
+
+## GitHub Actions
+
+GitHub ActionsのワークフローでもiFlow CLIをコミュニティがメンテナンスするアクションで使用できます: [iflow-cli-action](https://github.com/vibe-ideas/iflow-cli-action)
