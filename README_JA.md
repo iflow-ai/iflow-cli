@@ -156,3 +156,11 @@ iFlow CLIは任意のOpenAI互換APIに接続できます。使用するモデ�
 ## GitHub Actions
 
 GitHub ActionsのワークフローでもiFlow CLIをコミュニティがメンテナンスするアクションで使用できます: [iflow-cli-action](https://github.com/vibe-ideas/iflow-cli-action)
+
+## コミュニティコミュニケーション
+使用中に問題が発生した場合は、GitHubページで直接Issuesを作成してください。
+
+また、以下のWeChatグループQRコードをスキャンして、コミュニケーションや議論のためのコミュニティグループに参加することもできます。
+
+### WeChatグループ
+![WeChatグループ](./assets/iflow-wechat.jpg)

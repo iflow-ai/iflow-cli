@@ -156,3 +156,11 @@ Aquí tienes un archivo de configuración de ejemplo:
 ## GitHub Actions
 
 También puedes usar iFlow CLI en tus flujos de trabajo de GitHub Actions con la acción mantenida por la comunidad: [iflow-cli-action](https://github.com/vibe-ideas/iflow-cli-action)
+
+## Comunicación de la Comunidad
+Si encuentras problemas durante el uso, puedes crear Issues directamente en la página de GitHub.
+
+También puedes escanear el siguiente código QR del grupo de WeChat para unirte al grupo de la comunidad para comunicación y discusión.
+
+### Grupo de WeChat
+![Grupo de WeChat](./assets/iflow-wechat.jpg)
