@@ -371,14 +371,6 @@ create_settings_config() {
       "cwd": ".",
       "timeout": 30000,
       "trust": false
-    },
-    "magic": {
-      "command": "npx",
-      "args": ["-y", "@21st-dev/magic"],
-      "env": {},
-      "cwd": ".",
-      "timeout": 30000,
-      "trust": false
     }
   }
 }
@@ -389,7 +381,7 @@ EOF
 
 # Install iFlow CLI
 install_iFlow_cli() {
-    local package_url="https://cloud.iflow.cn/iflow-cli/iflow-iflow-cli-0.1.2.tgz"
+    local package_url="https://cloud.iflow.cn/iflow-cli/iflow-iflow-cli-0.1.3.tgz"
     
     log_info "Installing iFlow CLI..."
     
