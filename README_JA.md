@@ -28,7 +28,12 @@ bash -c "$(curl -fsSL https://cloud.iflow.cn/iflow-cli/install.sh)"
 
 このコマンドにより、ターミナルに必要な依存関係がすべて自動的にインストールされます。
 
-**Windowsユーザーの方へ**: まずターミナルで`bash`を起動してから、上記のインストールスクリプトを実行してください。
+**Windowsユーザーの方へ**:
+1. https://nodejs.org/ja/download にアクセスして最新のNode.jsインストーラーをダウンロードしてください
+2. インストーラーを実行してNode.jsをインストールしてください
+3. ターミナルを再起動してください：CMDまたはPowerShell
+4. `npm install -g @iflow-ai/iflow-cli` を実行してiFlow CLIをインストールしてください
+5. `iflow` を実行してiFlow CLIを開始してください
 
 ## 🔑 認証
 

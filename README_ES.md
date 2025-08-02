@@ -28,7 +28,12 @@ bash -c "$(curl -fsSL https://cloud.iflow.cn/iflow-cli/install.sh)"
 
 Este comando instala automáticamente todas las dependencias necesarias para tu terminal.
 
-**Usuarios de Windows**: Primero ejecuta `bash` en tu terminal, luego ejecuta el script de instalación anterior.
+**Usuarios de Windows**:
+1. Ve a https://nodejs.org/es/download para descargar el instalador de Node.js más reciente
+2. Ejecuta el instalador para instalar Node.js
+3. Reinicia tu terminal: CMD o PowerShell
+4. Ejecuta `npm install -g @iflow-ai/iflow-cli` para instalar iFlow CLI
+5. Ejecuta `iflow` para iniciar iFlow CLI
 
 ## 🔑 Autenticación
 
