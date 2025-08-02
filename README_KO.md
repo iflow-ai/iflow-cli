@@ -28,7 +28,12 @@ bash -c "$(curl -fsSL https://cloud.iflow.cn/iflow-cli/install.sh)"
 
 이 명령어는 터미널에 필요한 모든 종속성을 자동으로 설치합니다.
 
-**Windows 사용자**: 먼저 터미널에서 `bash`를 실행한 후 위의 설치 스크립트를 실행하세요.
+**Windows 사용자**:
+1. https://nodejs.org/ko/download 로 이동하여 최신 Node.js 설치 프로그램을 다운로드하세요
+2. 설치 프로그램을 실행하여 Node.js를 설치하세요
+3. 터미널을 다시 시작하세요: CMD 또는 PowerShell
+4. `npm install -g @iflow-ai/iflow-cli`를 실행하여 iFlow CLI를 설치하세요
+5. `iflow` 를 실행하여 iFlow CLI를 시작하세요
 
 ## 🔑 인증
 
