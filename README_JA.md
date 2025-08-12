@@ -35,6 +35,16 @@ bash -c "$(curl -fsSL https://cloud.iflow.cn/iflow-cli/install.sh)"
 4. `npm install -g @iflow-ai/iflow-cli` を実行してiFlow CLIをインストールしてください
 5. `iflow` を実行してiFlow CLIを開始してください
 
+中国本土の場合は、以下のコマンドでiFlow CLIをインストールできます：
+1. https://cloud.iflow.cn/iflow-cli/nvm-setup.exe にアクセスして最新のnvmインストーラーをダウンロードしてください
+2. インストーラーを実行してnvmをインストールしてください
+3. **ターミナルを再起動してください：CMDまたはPowerShell**
+4. `nvm node_mirror https://npmmirror.com/mirrors/node/` と `nvm npm_mirror https://npmmirror.com/mirrors/npm/` を実行してください
+5. `nvm install 22` を実行してNode.js 22をインストールしてください
+6. `nvm use 22` を実行してNode.js 22を使用してください
+7. `npm install -g @iflow-ai/iflow-cli` を実行してiFlow CLIをインストールしてください
+8. `iflow` を実行してiFlow CLIを開始してください
+
 ## 🔑 認証
 
 iFlowでは2つの認証オプションを提供しています：

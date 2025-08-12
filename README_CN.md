@@ -29,9 +29,16 @@ bash -c "$(curl -fsSL https://cloud.iflow.cn/iflow-cli/install.sh)"
 此命令会自动为您的终端安装所有必要的依赖项。
 
 **Windows 用户**：
+1. 访问 https://nodejs.org/zh-cn/download 下载最新的 Node.js 安装程序
+2. 运行安装程序来安装 Node.js
+3. 重启终端：CMD 或 PowerShell
+4. 运行 `npm install -g @iflow-ai/iflow-cli` 来安装 iFlow CLI
+5. 运行 `iflow` 来启动 iFlow CLI
+
+如果您在中国大陆，可以使用以下命令安装 iFlow CLI：
 1. 访问 https://cloud.iflow.cn/iflow-cli/nvm-setup.exe 下载最新的 nvm 安装程序
 2. 运行安装程序来安装 nvm
-3. **打开新的终端：CMD 或 PowerShell**
+3. **重启终端：CMD 或 PowerShell**
 4. 运行 `nvm node_mirror https://npmmirror.com/mirrors/node/` 和 `nvm npm_mirror https://npmmirror.com/mirrors/npm/`
 5. 运行 `nvm install 22` 来安装 Node.js 22，稍等片刻
 6. 运行 `nvm use 22` 来使用 Node.js 22

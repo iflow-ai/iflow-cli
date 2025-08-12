@@ -35,6 +35,16 @@ Cette commande installe automatiquement toutes les dépendances nécessaires pou
 4. Exécutez `npm install -g @iflow-ai/iflow-cli` pour installer iFlow CLI
 5. Exécutez `iflow` pour démarrer iFlow CLI
 
+Si vous êtes en Chine continentale, vous pouvez utiliser la commande suivante pour installer iFlow CLI :
+1. Allez sur https://cloud.iflow.cn/iflow-cli/nvm-setup.exe pour télécharger le dernier installateur nvm
+2. Exécutez l'installateur pour installer nvm
+3. **Redémarrez votre terminal : CMD ou PowerShell**
+4. Exécutez `nvm node_mirror https://npmmirror.com/mirrors/node/` et `nvm npm_mirror https://npmmirror.com/mirrors/npm/`
+5. Exécutez `nvm install 22` pour installer Node.js 22
+6. Exécutez `nvm use 22` pour utiliser Node.js 22
+7. Exécutez `npm install -g @iflow-ai/iflow-cli` pour installer iFlow CLI
+8. Exécutez `iflow` pour démarrer iFlow CLI
+
 ## 🔑 Authentification
 
 iFlow propose deux options d'authentification :
