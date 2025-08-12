@@ -31,6 +31,48 @@ command_exists() {
     command -v "$1" >/dev/null 2>&1
 }
 
+# Install uv
+install_uv() {
+    local platform=$(uname -s)
+    
+    if command_exists uv; then
+        log_success "uv is already installed"
+        log_info "uv version: $(uv --version 2>/dev/null || echo 'version info not available')"
+        return 0
+    fi
+    
+    log_info "Installing uv..."
+    
+    case "$platform" in
+        Linux|Darwin)
+            # MacOS/Linux installation
+            if curl -LsSf https://astral.sh/uv/install.sh | sh; then
+                log_success "uv installed successfully"
+                # Add uv to PATH for current session
+                export PATH="$HOME/.cargo/bin:$PATH"
+                return 0
+            else
+                log_error "Failed to install uv"
+                return 1
+            fi
+            ;;
+        MINGW*|CYGWIN*|MSYS*)
+            log_info "Windows platform detected. Installing uv using PowerShell..."
+            if powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"; then
+                log_success "uv installed successfully"
+                return 0
+            else
+                log_error "Failed to install uv"
+                return 1
+            fi
+            ;;
+        *)
+            log_error "Unsupported platform for uv installation: $platform"
+            return 1
+            ;;
+    esac
+}
+
 # Check if it's a development machine environment
 is_dev_machine() {
     # Check if development machine specific directories or files exist
@@ -71,38 +113,39 @@ clean_npmrc_conflict() {
 # Download nvm offline package
 download_nvm_offline() {
     local VERSION=${1:-v0.40.3}
-    local REPO="nvm-sh/nvm"
     local OUT_DIR=${2:-"/tmp/nvm-offline-${VERSION}"}
-    local RAW="https://raw.githubusercontent.com/${REPO}/${VERSION}"
+    local PACKAGE_URL="https://cloud.iflow.cn/iflow-cli/nvm-${VERSION}.tar.gz"
+    local TEMP_FILE="/tmp/nvm-${VERSION}.tar.gz"
     
-    log_info "Downloading nvm ${VERSION} to ${OUT_DIR}"
+    log_info "Downloading nvm ${VERSION} package to ${OUT_DIR}"
     mkdir -p "${OUT_DIR}"
     
-    # Use multiple mirror sources to improve success rate
-    local MIRRORS=(
-        "https://raw.githubusercontent.com/${REPO}/${VERSION}"
-        "https://ghproxy.com/https://raw.githubusercontent.com/${REPO}/${VERSION}"
-        "https://mirror.ghproxy.com/https://raw.githubusercontent.com/${REPO}/${VERSION}"
-    )
-    
-    local success=false
-    for mirror in "${MIRRORS[@]}"; do
-        log_info "Trying mirror: ${mirror}"
-        if curl -sSL --connect-timeout 10 --max-time 30 "${mirror}/nvm.sh" -o "${OUT_DIR}/nvm.sh" 2>/dev/null && \
-           curl -sSL --connect-timeout 10 --max-time 30 "${mirror}/nvm-exec" -o "${OUT_DIR}/nvm-exec" 2>/dev/null && \
-           curl -sSL --connect-timeout 10 --max-time 30 "${mirror}/bash_completion" -o "${OUT_DIR}/bash_completion" 2>/dev/null; then
-            success=true
-            break
+    # Download nvm package from iflow cloud storage
+    log_info "Downloading from: ${PACKAGE_URL}"
+    if curl -sSL --connect-timeout 10 --max-time 60 "${PACKAGE_URL}" -o "${TEMP_FILE}"; then
+        log_info "Package downloaded successfully, extracting..."
+        
+        # Extract package to output directory
+        if tar -xzf "${TEMP_FILE}" -C "${OUT_DIR}"; then
+            # Clean up temporary file
+            rm -f "${TEMP_FILE}"
+            
+            # Make nvm-exec executable
+            if [ -f "${OUT_DIR}/nvm-exec" ]; then
+                chmod +x "${OUT_DIR}/nvm-exec"
+            fi
+            
+            log_success "nvm downloaded and extracted successfully"
+            return 0
+        else
+            log_error "Failed to extract nvm package"
+            rm -f "${TEMP_FILE}"
+            return 1
         fi
-    done
-    
-    if [ "$success" = false ]; then
-        log_error "Failed to download nvm from all mirrors"
+    else
+        log_error "Failed to download nvm package from iflow cloud storage"
         return 1
     fi
-    
-    chmod +x "${OUT_DIR}/nvm-exec"
-    log_success "nvm downloaded successfully"
 }
 
 # Install nvm
@@ -379,9 +422,84 @@ EOF
     log_success "Settings configuration created at $SETTINGS_FILE"
 }
 
+# Uninstall existing iFlow CLI
+uninstall_existing_iflow() {
+    local platform=$(uname -s)
+    
+    if command_exists iflow; then
+        log_warning "Existing iFlow CLI installation detected"
+        
+        # Try to get current version
+        local current_version=$(iflow --version 2>/dev/null || echo "unknown")
+        log_info "Current version: $current_version"
+        
+        log_info "Uninstalling existing iFlow CLI..."
+        
+        # Try npm uninstall first
+        if npm uninstall -g @iflow-ai/iflow-cli 2>/dev/null; then
+            log_success "Successfully uninstalled existing iFlow CLI via npm"
+        else
+            log_warning "Could not uninstall via npm, trying to remove manually..."
+            
+            case "$platform" in
+                MINGW*|CYGWIN*|MSYS*)
+                    # Windows platform
+                    local npm_prefix=$(npm config get prefix 2>/dev/null || echo "%APPDATA%\\npm")
+                    local bin_path="$npm_prefix/iflow.cmd"
+                    
+                    # Remove iflow binary if exists
+                    if [ -f "$bin_path" ]; then
+                        rm -f "$bin_path" && log_info "Removed $bin_path"
+                    fi
+                    
+                    # Remove from common Windows locations
+                    local common_paths=(
+                        "$npm_prefix/iflow"
+                        "$npm_prefix/iflow.cmd"
+                        "$APPDATA/npm/iflow.cmd"
+                    )
+                    ;;
+                *)
+                    # Unix-like platforms (Linux/macOS)
+                    local npm_prefix=$(npm config get prefix 2>/dev/null || echo "$HOME/.npm-global")
+                    local bin_path="$npm_prefix/bin/iflow"
+                    
+                    # Remove iflow binary if exists
+                    if [ -f "$bin_path" ]; then
+                        rm -f "$bin_path" && log_info "Removed $bin_path"
+                    fi
+                    
+                    # Remove from common Unix locations
+                    local common_paths=(
+                        "/usr/local/bin/iflow"
+                        "$HOME/.npm-global/bin/iflow"
+                        "$HOME/.local/bin/iflow"
+                    )
+                    ;;
+            esac
+            
+            for path in "${common_paths[@]}"; do
+                if [ -f "$path" ]; then
+                    rm -f "$path" && log_info "Removed $path"
+                fi
+            done
+        fi
+        
+        # Verify uninstallation
+        if command_exists iflow; then
+            log_warning "iFlow CLI still exists after uninstall attempt. Continuing with installation..."
+        else
+            log_success "Successfully removed existing iFlow CLI"
+        fi
+    fi
+}
+
 # Install iFlow CLI
 install_iFlow_cli() {
     local package_url="https://cloud.iflow.cn/iflow-cli/iflow-iflow-cli-0.1.3.tgz"
+    
+    # Uninstall existing installation first
+    uninstall_existing_iflow
     
     log_info "Installing iFlow CLI..."
     
@@ -432,6 +550,9 @@ main() {
     if is_dev_machine; then
         log_info "Development machine environment detected"
     fi
+    
+    # Install uv first
+    install_uv
     
     # Check and install Node.js
     check_and_install_nodejs
