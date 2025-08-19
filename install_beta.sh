@@ -53,6 +53,7 @@ install_uv() {
                 return 0
             else
                 log_error "Failed to install uv"
+                log_warning "Continuing without uv installation..."
                 return 1
             fi
             ;;
@@ -63,11 +64,13 @@ install_uv() {
                 return 0
             else
                 log_error "Failed to install uv"
+                log_warning "Continuing without uv installation..."
                 return 1
             fi
             ;;
         *)
             log_error "Unsupported platform for uv installation: $platform"
+            log_warning "Continuing without uv installation..."
             return 1
             ;;
     esac
@@ -385,42 +388,6 @@ check_and_install_nodejs() {
     fi
 }
 
-# Create settings.json configuration
-create_settings_config() {
-    local IFLOW_DIR="$HOME/.iflow"
-    local SETTINGS_FILE="$IFLOW_DIR/settings.json"
-    
-    log_info "Creating iFlow configuration..."
-    
-    # Create .iflow directory if it doesn't exist
-    mkdir -p "$IFLOW_DIR"
-    
-    # Create settings.json with MCP servers configuration
-    cat > "$SETTINGS_FILE" << 'EOF'
-{
-  "mcpServers": {
-    "sequential-thinking": {
-      "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"],
-      "env": {},
-      "cwd": ".",
-      "timeout": 30000,
-      "trust": false
-    },
-    "context7": {
-      "command": "npx",
-      "args": ["-y", "@upstash/context7-mcp"],
-      "env": {},
-      "cwd": ".",
-      "timeout": 30000,
-      "trust": false
-    }
-  }
-}
-EOF
-    
-    log_success "Settings configuration created at $SETTINGS_FILE"
-}
 
 # Uninstall existing iFlow CLI
 uninstall_existing_iflow() {
@@ -487,7 +454,27 @@ uninstall_existing_iflow() {
         
         # Verify uninstallation
         if command_exists iflow; then
-            log_warning "iFlow CLI still exists after uninstall attempt. Continuing with installation..."
+            log_warning "iFlow CLI still exists after uninstall attempt. Attempting to locate and remove it..."
+            
+            # Find the iflow executable
+            local iflow_path=$(which iflow 2>/dev/null)
+            if [ -n "$iflow_path" ] && [ -f "$iflow_path" ]; then
+                log_info "Found iflow executable at: $iflow_path"
+                if rm -f "$iflow_path"; then
+                    log_success "Successfully removed iflow executable: $iflow_path"
+                else
+                    log_error "Failed to remove iflow executable: $iflow_path"
+                fi
+            else
+                log_warning "Could not locate iflow executable path"
+            fi
+            
+            # Check again after removal attempt
+            if command_exists iflow; then
+                log_warning "iFlow CLI still exists after manual removal. Continuing with installation..."
+            else
+                log_success "Successfully removed existing iFlow CLI"
+            fi
         else
             log_success "Successfully removed existing iFlow CLI"
         fi
@@ -502,18 +489,8 @@ install_iFlow_cli() {
     log_info "Installing iFlow CLI..."
     
     # Install iFlow CLI
-    if npm i -g @iflow-ai/iflow-cli; then
+    if npm i -g @iflow-ai/iflow-cli@beta; then
         log_success "iFlow CLI installed successfully!"
-        
-        # Create settings configuration (skip on Windows)
-        case "$platform" in
-            MINGW*|CYGWIN*|MSYS*)
-                log_info "Skipping settings configuration on Windows platform"
-                ;;
-            *)
-                create_settings_config
-                ;;
-        esac
         
         # Verify installation
         if command_exists iFlow; then
@@ -543,8 +520,8 @@ main() {
         log_info "Development machine environment detected"
     fi
     
-    # Install uv first
-    install_uv
+    # Install uv first (continue even if it fails)
+    install_uv || log_warning "UV installation failed, but continuing with the rest of the installation..."
     
     # Check and install Node.js
     check_and_install_nodejs
