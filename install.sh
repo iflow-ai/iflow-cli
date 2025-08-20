@@ -436,7 +436,7 @@ uninstall_existing_iflow() {
         log_info "Uninstalling existing iFlow CLI..."
         
         # Try npm uninstall first
-        if npm uninstall -g @iflow-ai/iflow-cli 2>/dev/null; then
+        if npm uninstall -g @iflow-ai/iflow-cli@latest 2>/dev/null; then
             log_success "Successfully uninstalled existing iFlow CLI via npm"
         else
             log_warning "Could not uninstall via npm, trying to remove manually..."
