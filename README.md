@@ -5,25 +5,62 @@
 
 iFlow CLI is a powerful AI assistant that runs directly in your terminal. It seamlessly analyzes code repositories, executes coding tasks, understands context-specific needs, and boosts productivity by automating everything from simple file operations to complex workflows.
 
+[More Tutorials](https://platform.iflow.cn/)
+
 ## ✨ Key Features
 
-1. **Free AI Models**: Access powerful and free AI models through the [iFlow open platform](https://docs.iflow.cn/en/docs), including Kimi K2, Qwen3 Coder, DeepSeek v3, and more
+1. **Free AI Models**: Access powerful and free AI models through the [iFlow open platform](https://platform.iflow.cn/docs/api-mode), including Kimi K2, Qwen3 Coder, DeepSeek v3, and more
 2. **Flexible Integration**: Full support for OpenAI protocol model providers
 3. **Intuitive Interface**: Streamlined terminal experience with context-aware assistance
-4. **Ready-to-Use Assistant**: Pre-configured MCP servers and specialized agents that work together to solve complex problems right out of the box
+4. **Open Platform**: Install SubAgents and MCP tools with one click from the [iFlow Open Market](https://platform.iflow.cn/)
+
+## Feature Comparison
+| Feature | iFlow Cli | Claude Code | Gemini Cli |
+|---------|-----------|-------------|------------|
+| Todo Planning | ✅ | ✅ | ❌ |
+| SubAgent | ✅ | ✅ | ❌ |
+| Custom Commands | ✅ | ✅ | ✅ |
+| Plan Mode | ✅ | ✅ | ❌ |
+| Task Tools | ✅ | ✅ | ❌ |
+| VS Code Plugin | ✅ | ✅ | ✅ |
+| JetBrains Plugin | ✅ | ✅ | ❌ |
+| Conversation Recovery | ✅ | ✅ | ❌ |
+| Built-in Open Market | ✅ | ❌ | ❌ |
+| Memory Auto-compression | ✅ | ✅ | ✅ |
+| Multimodal Capability | ✅ | ⚠️ (Limited in China) | ⚠️ (Limited in China) |
+| Search | ✅ | ❌ | ⚠️ (Requires VPN) |
+| Free | ✅ | ❌ | ⚠️ (Limited Usage) |
+
+## ⭐ Key Features
+* Support 4 running modes: yolo (model has maximum permissions, can perform any operation), accepting edits (model only has file modification permissions), plan mode (plan first, then execute), default (model has no permissions)
+* Upgraded subAgent functionality: Transform CLI from general assistant to expert team, providing more professional and accurate advice. Use /agent to see more pre-configured agents
+* Upgraded task tool: Effectively compress context length, allowing CLI to complete your tasks more thoroughly. Auto-compression when context reaches 70%
+* Integrated with iFlow Open Market: Quickly install useful MCP tools, Subagents, and custom instructions. Use /mcp to learn more
+* Free multimodal model usage: You can also paste images in CLI now (Ctrl+V to paste images)
+* Support for conversation history saving and rollback (iflow --resume and /chat commands)
+* Support for more useful terminal commands (iflow -h to see more commands)
+* VSCode plugin support
+* Auto-upgrade: iFlow CLI automatically detects if current version is latest
+
 
 ## 📥 Installation
 
 ### System requirements
 - Operating Systems: macOS 10.15+, Ubuntu 20.04+/Debian 10+, or Windows 10+ (with WSL 1, WSL 2, or Git for Windows)
 - Hardware: 4GB+ RAM
-- Software: Node.js 18+
+- Software: Node.js 22+
 - Network: Internet connection required for authentication and AI processing
 - Shell: Works best in Bash, Zsh or Fish
 
-### install command
+### Installation Commands
+**MAC/Linux/Ubuntu Users**:
+* One-click installation command (Recommended)
 ```shell
 bash -c "$(curl -fsSL https://cloud.iflow.cn/iflow-cli/install.sh)"
+```
+* Using Node.js installation
+```shell
+npm i -g @iflow-ai/iflow-cli
 ```
 
 This command automatically installs all necessary dependencies for your terminal.
@@ -45,6 +82,10 @@ If you are in China Mainland, you can use the following command to install iFlow
 7. Run `npm install -g @iflow-ai/iflow-cli` to install iFlow CLI
 8. Run `iflow` to start iFlow CLI
 
+## 🗑️ Uninstall
+```shell
+npm uninstall -g @iflow-ai/iflow-cli
+```
 
 ## 🔑 Authentication
 
@@ -169,11 +210,11 @@ Here is a settings demo file:
 }
 ```
 
-## GitHub Actions
+## 🔄 GitHub Actions
 
 You can also use iFlow CLI in your GitHub Actions workflows with the community-maintained action: [iflow-cli-action](https://github.com/vibe-ideas/iflow-cli-action)
 
-## Community Communication
+## 👥 Community Communication
 If you encounter problems in use, you can directly raise Issues on the github page.
 
 You can also scan the following Wechat group to join the community group for communication and discussion.

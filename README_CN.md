@@ -5,25 +5,50 @@
 
 iFlow CLI 是一款直接在终端中运行的强大 AI 助手。它能够无缝分析代码仓库、执行编程任务、理解上下文需求，通过自动化处理从简单的文件操作到复杂的工作流程，全面提升您的工作效率。
 
+[更多使用教程](https://platform.iflow.cn/)
+
 ## ✨ 核心特性
 
-1. **免费 AI 模型**：通过 [心流开放平台](https://docs.iflow.cn/docs) 访问强大的免费 AI 模型，包括 Kimi K2、Qwen3 Coder、DeepSeek v3 等
+1. **免费 AI 模型**：通过 [心流开放平台](https://platform.iflow.cn/docs/api-mode) 访问强大的免费 AI 模型，包括 Kimi K2、Qwen3 Coder、DeepSeek v3 等
 2. **灵活集成**：完全支持 OpenAI 协议的模型提供商
 3. **直观界面**：简洁的终端体验，提供上下文感知的智能辅助
-4. **开箱即用**：预配置的 MCP 服务器和专业代理协同工作，自动解决复杂问题
+4. **开放平台**：从[心流开放市场](https://platform.iflow.cn/)中可以一键安装SubAgent和MCP
+
+## 功能对比
+| 功能 | iFlow Cli | Claude Code | Gemini Cli |
+|------|-----------|---------------------|------------|
+| todo规划 | ✅ | ✅ | ❌ |
+| subagent | ✅ | ✅ | ❌ |
+| 自定义command | ✅ | ✅ | ✅ |
+| plan模式 | ✅ | ✅ | ❌ |
+| task工具 | ✅ | ✅ | ❌ |
+| VS Code 插件 | ✅ | ✅ | ✅ |
+| JetBrain 插件 | ✅ | ✅ | ❌ |
+| 对话恢复 | ✅ | ✅ | ❌ |
+| 内置开放市场 | ✅ | ❌ | ❌ |
+| memory自动压缩 | ✅ | ✅ | ✅ |
+| 多模态能力 | ✅ | ⚠️（国内模型不支持） | ⚠️（国内模型不支持） |
+| 搜索 | ✅ | ❌ | ⚠️（翻墙） |
+| 免费 | ✅ | ❌ | ⚠️（次数限制） |
 
 ## 📥 安装
 
 ### 系统要求
 - 操作系统：macOS 10.15+、Ubuntu 20.04+/Debian 10+，或 Windows 10+（使用 WSL 1、WSL 2 或 Git for Windows）
 - 硬件：4GB+ 内存
-- 软件：Node.js 18+
+- 软件：Node.js 22+
 - 网络：需要互联网连接用于身份验证和 AI 处理
 - Shell：在 Bash、Zsh 或 Fish 中效果最佳
 
 ### 安装命令
+**MAC/Linux/Ubuntu用户**：
+* 一键安装命令(推荐)
 ```shell
 bash -c "$(curl -fsSL https://cloud.iflow.cn/iflow-cli/install.sh)"
+```
+* 使用Node.js安装
+```shell
+npm i -g @iflow-ai/iflow-cli
 ```
 
 此命令会自动为您的终端安装所有必要的依赖项。
@@ -44,6 +69,11 @@ bash -c "$(curl -fsSL https://cloud.iflow.cn/iflow-cli/install.sh)"
 6. 运行 `nvm use 22` 来使用 Node.js 22
 7. 运行 `npm install -g @iflow-ai/iflow-cli` 来安装 iFlow CLI
 8. 运行 `iflow` 来启动 iFlow CLI
+
+## 🗑️ 卸载
+```shell
+npm uninstall -g @iflow-ai/iflow-cli
+```
 
 ## 🔑 身份验证
 
@@ -168,11 +198,11 @@ iFlow CLI 可以连接任何兼容 OpenAI 的 API。编辑 `~/.iflow/settings.js
 }
 ```
 
-## GitHub Actions
+## 🔄 GitHub Actions
 
 您也可以在 GitHub Actions 工作流中使用社区维护的 action：[iflow-cli-action](https://github.com/vibe-ideas/iflow-cli-action)
 
-## 社区交流
+## 👥 社区交流
 如果您在使用过程中遇到问题，可以直接在 GitHub 页面上提出 Issues。
 
 您也可以扫描以下微信群二维码加入社区群进行交流讨论。

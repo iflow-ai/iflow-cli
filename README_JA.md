@@ -5,25 +5,62 @@
 
 iFlow CLIは、ターミナル上で直接動作する強力なAIアシスタントです。コードリポジトリの分析、コーディングタスクの実行、コンテキストに応じたニーズの理解を行い、シンプルなファイル操作から複雑なワークフローまでを自動化することで生産性を大幅に向上させます。
 
+[その他のチュートリアル](https://platform.iflow.cn/)
+
 ## ✨ 主な機能
 
-1. **無料のAIモデル**: [iFlowオープンプラットフォーム](https://docs.iflow.cn/en/docs)を通じて、Kimi K2、Qwen3 Coder、DeepSeek v3などの強力で無料のAIモデルにアクセス可能
+1. **無料のAIモデル**: [iFlowオープンプラットフォーム](https://platform.iflow.cn/docs/api-mode)を通じて、Kimi K2、Qwen3 Coder、DeepSeek v3などの強力で無料のAIモデルにアクセス可能
 2. **柔軟な統合**: OpenAIプロトコル対応のモデルプロバイダーを完全サポート
 3. **直感的なインターフェース**: コンテキストを理解するアシスタント機能を備えた、使いやすいターミナル体験
-4. **すぐに使えるアシスタント**: 事前設定されたMCPサーバーと専門エージェントが連携し、複雑な問題を箱から出してすぐに解決
+4. **オープンプラットフォーム**: [iFlowオープンマーケット](https://platform.iflow.cn/)からSubAgentとMCPツールをワンクリックでインストール
+
+## 機能対比
+| 機能 | iFlow Cli | Claude Code | Gemini Cli |
+|------|-----------|-------------|------------|
+| Todo計画 | ✅ | ✅ | ❌ |
+| SubAgent | ✅ | ✅ | ❌ |
+| カスタムコマンド | ✅ | ✅ | ✅ |
+| プランモード | ✅ | ✅ | ❌ |
+| タスクツール | ✅ | ✅ | ❌ |
+| VS Code プラグイン | ✅ | ✅ | ✅ |
+| JetBrains プラグイン | ✅ | ✅ | ❌ |
+| 会話復元 | ✅ | ✅ | ❌ |
+| 内蔵オープンマーケット | ✅ | ❌ | ❌ |
+| メモリ自動圧縮 | ✅ | ✅ | ✅ |
+| マルチモーダル機能 | ✅ | ⚠️（中国国内モデル非対応） | ⚠️（中国国内モデル非対応） |
+| 検索 | ✅ | ❌ | ⚠️（VPN必要） |
+| 無料 | ✅ | ❌ | ⚠️（使用制限あり） |
+
+## ⭐ 重要機能
+* 4つの実行モードをサポート：yolo（モデルに最大権限、すべての操作を実行可能）、accepting edits（モデルにファイル変更権限のみ）、plan mode（計画してから実行）、default（モデルに権限なし）
+* subAgent機能のアップグレード：CLIを汎用アシスタントから専門チームに進化させ、より専門的で正確なアドバイスを提供。/agentでより多くの事前設定されたエージェントを確認
+* taskツールのアップグレード：コンテキスト長を効果的に圧縮し、CLIがより深くタスクを完了できるように。コンテキストが70%に達すると自動圧縮
+* iFlowオープンマーケットとの統合：便利なMCPツール、Subagent、カスタム指示を迅速にインストール。/mcpで詳細を確認
+* 無料マルチモーダルモデル使用：CLIで画像も貼り付け可能（Ctrl+Vで画像貼り付け）
+* 会話履歴保存・ロールバック機能（iflow --resumeと/chatコマンド）
+* より便利なターミナルコマンドをサポート（iflow -hでより多くのコマンドを確認）
+* VSCodeプラグインサポート
+* 自動アップグレード：iFlow CLIが現在のバージョンが最新かを自動検出
+
 
 ## 📥 インストール
 
 ### システム要件
 - オペレーティングシステム: macOS 10.15+、Ubuntu 20.04+/Debian 10+、またはWindows 10+（WSL 1、WSL 2、またはGit for Windows）
 - ハードウェア: 4GB以上のRAM
-- ソフトウェア: Node.js 18+
+- ソフトウェア: Node.js 22+
 - ネットワーク: 認証とAI処理のためにインターネット接続が必要
 - シェル: Bash、Zsh、またはFishで最適に動作
 
 ### インストールコマンド
+**MAC/Linux/Ubuntuユーザー**:
+* ワンクリックインストールコマンド（推奨）
 ```shell
 bash -c "$(curl -fsSL https://cloud.iflow.cn/iflow-cli/install.sh)"
+```
+* Node.jsを使用したインストール
+```shell
+npm i -g @iflow-ai/iflow-cli
 ```
 
 このコマンドにより、ターミナルに必要な依存関係がすべて自動的にインストールされます。
@@ -44,6 +81,11 @@ bash -c "$(curl -fsSL https://cloud.iflow.cn/iflow-cli/install.sh)"
 6. `nvm use 22` を実行してNode.js 22を使用してください
 7. `npm install -g @iflow-ai/iflow-cli` を実行してiFlow CLIをインストールしてください
 8. `iflow` を実行してiFlow CLIを開始してください
+
+## 🗑️ アンインストール
+```shell
+npm uninstall -g @iflow-ai/iflow-cli
+```
 
 ## 🔑 認証
 
@@ -168,11 +210,11 @@ iFlow CLIは任意のOpenAI互換APIに接続できます。使用するモデ�
 }
 ```
 
-## GitHub Actions
+## 🔄 GitHub Actions
 
 GitHub ActionsのワークフローでもiFlow CLIをコミュニティがメンテナンスするアクションで使用できます: [iflow-cli-action](https://github.com/vibe-ideas/iflow-cli-action)
 
-## コミュニティコミュニケーション
+## 👥 コミュニティコミュニケーション
 使用中に問題が発生した場合は、GitHubページで直接Issuesを作成してください。
 
 また、以下のWeChatグループQRコードをスキャンして、コミュニケーションや議論のためのコミュニティグループに参加することもできます。

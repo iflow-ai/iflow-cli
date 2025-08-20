@@ -5,25 +5,62 @@
 
 iFlow CLI est un assistant IA puissant qui s'exécute directement dans votre terminal. Il analyse de manière transparente les dépôts de code, exécute des tâches de programmation, comprend les besoins spécifiques au contexte et améliore la productivité en automatisant tout, des opérations simples sur les fichiers aux flux de travail complexes.
 
+[Plus de Tutoriels](https://platform.iflow.cn/)
+
 ## ✨ Fonctionnalités principales
 
-1. **Modèles IA gratuits** : Accédez à des modèles IA puissants et gratuits via la [plateforme ouverte iFlow](https://docs.iflow.cn/en/docs), incluant Kimi K2, Qwen3 Coder, DeepSeek v3, et bien d'autres
+1. **Modèles IA gratuits** : Accédez à des modèles IA puissants et gratuits via la [plateforme ouverte iFlow](https://platform.iflow.cn/docs/api-mode), incluant Kimi K2, Qwen3 Coder, DeepSeek v3, et bien d'autres
 2. **Intégration flexible** : Support complet pour les fournisseurs de modèles compatibles avec le protocole OpenAI
 3. **Interface intuitive** : Expérience terminal simplifiée avec assistance contextuelle
-4. **Assistant prêt à l'emploi** : Serveurs MCP préconfigurés et agents spécialisés qui travaillent ensemble pour résoudre des problèmes complexes dès la sortie de la boîte
+4. **Plateforme ouverte** : Installation en un clic de SubAgent et MCP depuis le [marché ouvert iFlow](https://platform.iflow.cn/)
+
+## Comparaison des fonctionnalités
+| Fonctionnalité | iFlow Cli | Claude Code | Gemini Cli |
+|----------------|-----------|-------------|------------|
+| Planification Todo | ✅ | ✅ | ❌ |
+| SubAgent | ✅ | ✅ | ❌ |
+| Commandes personnalisées | ✅ | ✅ | ✅ |
+| Mode plan | ✅ | ✅ | ❌ |
+| Outils de tâche | ✅ | ✅ | ❌ |
+| Plugin VS Code | ✅ | ✅ | ✅ |
+| Plugin JetBrains | ✅ | ✅ | ❌ |
+| Récupération de conversation | ✅ | ✅ | ❌ |
+| Marché ouvert intégré | ✅ | ❌ | ❌ |
+| Compression mémoire automatique | ✅ | ✅ | ✅ |
+| Capacité multimodale | ✅ | ⚠️ (Modèles chinois non supportés) | ⚠️ (Modèles chinois non supportés) |
+| Recherche | ✅ | ❌ | ⚠️ (VPN requis) |
+| Gratuit | ✅ | ❌ | ⚠️ (Usage limité) |
+
+## ⭐ Fonctionnalités clés
+* Support de 4 modes de fonctionnement : yolo (modèle avec permissions maximales, peut exécuter n'importe quelle opération), accepting edits (modèle avec permissions de modification de fichiers uniquement), plan mode (planifier d'abord puis exécuter), default (modèle sans aucune permission)
+* Fonctionnalité subAgent améliorée. Fait évoluer le CLI d'un assistant généraliste vers une équipe d'experts, vous fournissant des conseils plus professionnels et précis. Utilisez /agent pour voir plus d'agents préconfigurés
+* Outil task amélioré. Compression efficace de la longueur du contexte, permettant au CLI d'accomplir vos tâches plus en profondeur. Compression automatique quand le contexte atteint 70%
+* Intégration avec le marché ouvert iFlow. Installation rapide d'outils MCP utiles, de Subagents et d'instructions personnalisées. Utilisez /mcp pour en savoir plus
+* Utilisation gratuite de modèles multimodaux, vous pouvez également coller des images dans le CLI (Ctrl+V pour coller des images)
+* Support de la sauvegarde et du retour en arrière de l'historique des conversations (commandes iflow --resume et /chat)
+* Support de plus de commandes de terminal utiles (iflow -h pour voir plus de commandes)
+* Support du plugin VSCode
+* Mise à niveau automatique, iFlow CLI détecte automatiquement si la version actuelle est la plus récente
+
 
 ## 📥 Installation
 
 ### Configuration système requise
 - Systèmes d'exploitation : macOS 10.15+, Ubuntu 20.04+/Debian 10+, ou Windows 10+ (avec WSL 1, WSL 2, ou Git for Windows)
 - Matériel : 4GB+ de RAM
-- Logiciel : Node.js 18+
+- Logiciel : Node.js 22+
 - Réseau : Connexion Internet requise pour l'authentification et le traitement IA
 - Shell : Fonctionne mieux avec Bash, Zsh ou Fish
 
 ### Commande d'installation
+**Utilisateurs MAC/Linux/Ubuntu** :
+* Commande d'installation en un clic (Recommandée)
 ```shell
 bash -c "$(curl -fsSL https://cloud.iflow.cn/iflow-cli/install.sh)"
+```
+* Installation avec Node.js
+```shell
+npm i -g @iflow-ai/iflow-cli
 ```
 
 Cette commande installe automatiquement toutes les dépendances nécessaires pour votre terminal.
@@ -44,6 +81,11 @@ Si vous êtes en Chine continentale, vous pouvez utiliser la commande suivante p
 6. Exécutez `nvm use 22` pour utiliser Node.js 22
 7. Exécutez `npm install -g @iflow-ai/iflow-cli` pour installer iFlow CLI
 8. Exécutez `iflow` pour démarrer iFlow CLI
+
+## 🗑️ Désinstallation
+```shell
+npm uninstall -g @iflow-ai/iflow-cli
+```
 
 ## 🔑 Authentification
 
@@ -168,11 +210,11 @@ Voici un exemple de fichier de paramètres :
 }
 ```
 
-## GitHub Actions
+## 🔄 GitHub Actions
 
 Vous pouvez également utiliser iFlow CLI dans vos workflows GitHub Actions avec l'action maintenue par la communauté : [iflow-cli-action](https://github.com/vibe-ideas/iflow-cli-action)
 
-## Communication Communautaire
+## 👥 Communication Communautaire
 Si vous rencontrez des problèmes lors de l'utilisation, vous pouvez directement créer des Issues sur la page GitHub.
 
 Vous pouvez également scanner le code QR du groupe WeChat suivant pour rejoindre le groupe communautaire pour la communication et la discussion.
