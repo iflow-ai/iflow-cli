@@ -10,9 +10,9 @@ iFlow CLI is a powerful AI assistant that runs directly in your terminal. It sea
 ## ✨ Key Features
 
 1. **Free AI Models**: Access powerful and free AI models through the [iFlow open platform](https://platform.iflow.cn/docs/api-mode), including Kimi K2, Qwen3 Coder, DeepSeek v3, and more
-2. **Flexible Integration**: Full support for OpenAI protocol model providers
-3. **Intuitive Interface**: Streamlined terminal experience with context-aware assistance
-4. **Open Platform**: Install SubAgents and MCP tools with one click from the [iFlow Open Market](https://platform.iflow.cn/)
+2. **Flexible Integration**: Keep your favorite development tools while integrating into existing systems for automation
+3. **Natural Language Interaction**: Say goodbye to complex commands, drive AI with everyday conversation, from code development to life assistance
+4. **Open Platform**: Install SubAgents and MCP with one click from the [iFlow Open Market](https://platform.iflow.cn/), quickly expand intelligent agents and build your own AI team
 
 ## Feature Comparison
 | Feature | iFlow Cli | Claude Code | Gemini Cli |

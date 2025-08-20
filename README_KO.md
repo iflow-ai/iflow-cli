@@ -10,9 +10,9 @@ iFlow CLI는 터미널에서 직접 실행되는 강력한 AI 어시스턴트입
 ## ✨ 주요 기능
 
 1. **무료 AI 모델**: [iFlow 오픈 플랫폼](https://platform.iflow.cn/docs/api-mode)을 통해 Kimi K2, Qwen3 Coder, DeepSeek v3 등 강력하고 무료인 AI 모델에 액세스
-2. **유연한 통합**: OpenAI 프로토콜 모델 제공업체 완전 지원
-3. **직관적인 인터페이스**: 상황 인식 지원이 포함된 간소화된 터미널 경험
-4. **오픈 플랫폼**: [iFlow 오픈 마켓](https://platform.iflow.cn/)에서 SubAgent와 MCP 도구를 원클릭으로 설치
+2. **유연한 통합**: 좋아하는 개발 도구를 유지하면서 기존 시스템에 통합하여 자동화 구현
+3. **자연어 상호작용**: 복잡한 명령어와 작별하고, 일상 대화로 AI를 구동하여 코드 개발부터 생활 어시스턴트까지
+4. **오픈 플랫폼**: [iFlow 오픈 마켓](https://platform.iflow.cn/)에서 SubAgent와 MCP를 원클릭으로 설치, 지능형 에이전트를 빠르게 확장하여 나만의 AI 팀 구축
 
 ## 기능 비교
 | 기능 | iFlow Cli | Claude Code | Gemini Cli |

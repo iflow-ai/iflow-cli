@@ -10,9 +10,10 @@ iFlow CLI 是一款直接在终端中运行的强大 AI 助手。它能够无缝
 ## ✨ 核心特性
 
 1. **免费 AI 模型**：通过 [心流开放平台](https://platform.iflow.cn/docs/api-mode) 访问强大的免费 AI 模型，包括 Kimi K2、Qwen3 Coder、DeepSeek v3 等
-2. **灵活集成**：完全支持 OpenAI 协议的模型提供商
-3. **直观界面**：简洁的终端体验，提供上下文感知的智能辅助
-4. **开放平台**：从[心流开放市场](https://platform.iflow.cn/)中可以一键安装SubAgent和MCP
+2. **灵活集成**：保留你喜欢的开发工具，也可集成到现有系统实现自动化
+3. **自然语言交互**：告别复杂命令，用日常对话驱动 AI，从代码开发到生活助理
+4. **开放平台**：从[心流开放市场](https://platform.iflow.cn/)中可以一键安装SubAgent和MCP,快速扩展智能体，组建只属于你的AI团队
+
 
 ## 功能对比
 | 功能 | iFlow Cli | Claude Code | Gemini Cli |
