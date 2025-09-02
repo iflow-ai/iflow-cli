@@ -284,41 +284,6 @@ install_nodejs_with_nvm() {
     fi
 }
 
-# Configure npm global directory
-setup_npm_global() {
-    local NPM_GLOBAL_DIR="${HOME}/.npm-global"
-    local PROFILE_FILE=$(get_shell_profile)
-    local current_shell=$(basename "$SHELL")
-    
-    log_info "Setting up npm global directory..."
-    
-    # Create global directory
-    mkdir -p "${NPM_GLOBAL_DIR}"
-    
-    # Set npm prefix
-    npm config set prefix "${NPM_GLOBAL_DIR}"
-    
-    # Add to PATH
-    if [ "$current_shell" = "fish" ]; then
-        # Fish shell PATH配置
-        if ! grep -q '.npm-global/bin' "${PROFILE_FILE}" 2>/dev/null; then
-            echo 'set -gx PATH $HOME/.npm-global/bin $PATH' >> "${PROFILE_FILE}"
-            log_info "Added npm global bin to PATH in ${PROFILE_FILE}"
-        fi
-    else
-        # Bash/Zsh PATH配置
-        if ! grep -q '.npm-global/bin' "${PROFILE_FILE}" 2>/dev/null; then
-            echo 'export PATH="$HOME/.npm-global/bin:$PATH"' >> "${PROFILE_FILE}"
-            log_info "Added npm global bin to PATH in ${PROFILE_FILE}"
-        fi
-    fi
-    
-    # Take effect immediately
-    export PATH="$HOME/.npm-global/bin:$PATH"
-    
-    log_success "npm global directory configured"
-}
-
 # Check Node.js version
 check_node_version() {
     if ! command_exists node; then
@@ -361,8 +326,6 @@ install_nodejs() {
                 return 1
             fi
             
-            # Configure npm global directory
-            setup_npm_global
             ;;
         MINGW*|CYGWIN*|MSYS*)
             log_error "Windows platform detected. Please use Windows installer or WSL."
@@ -381,7 +344,6 @@ check_and_install_nodejs() {
     if check_node_version; then
         log_info "Using existing Node.js installation"
         clean_npmrc_conflict
-        setup_npm_global
     else
         log_warning "Installing or upgrading Node.js..."
         install_nodejs
