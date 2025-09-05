@@ -1,4 +1,7 @@
 # 🤖 iFlow CLI
+
+[![Awesome Gemini CLI で紹介](https://awesome.re/mentioned-badge.svg)](https://github.com/Piebald-AI/awesome-gemini-cli)
+
 ![iFlow CLI Screenshot](./assets/iflow-cli.jpg)
 
 [English](README.md) | [中文](README_CN.md) | **日本語** | [한국어](README_KO.md) | [Français](README_FR.md) | [Deutsch](README_DE.md) | [Español](README_ES.md) | [Русский](README_RU.md)
