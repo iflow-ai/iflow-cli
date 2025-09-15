@@ -455,8 +455,8 @@ install_iFlow_cli() {
         log_success "iFlow CLI installed successfully!"
         
         # Verify installation
-        if command_exists iFlow; then
-            log_info "iFlow CLI version: $(iFlow --version 2>/dev/null || echo 'version info not available')"
+        if command_exists iflow; then
+            log_info "iFlow CLI version: $(iflow --version 2>/dev/null || echo 'version info not available')"
         else
             log_warning "iFlow CLI installed but command not found. You may need to reload your shell or add npm global bin to PATH."
             log_info "Try running: export PATH=\"\$PATH:$(npm config get prefix)/bin\""
