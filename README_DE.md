@@ -33,12 +33,18 @@ iFlow CLI ist ein leistungsstarker KI-Assistent, der direkt in Ihrem Terminal l�
 | Multimodale Fähigkeiten | ✅ | ⚠️ (Chinesische Modelle nicht unterstützt) | ⚠️ (Chinesische Modelle nicht unterstützt) |
 | Suche | ✅ | ❌ | ⚠️ (VPN erforderlich) |
 | Kostenlos | ✅ | ❌ | ⚠️ (Begrenzte Nutzung) |
+| Hook | ✅ | ✅ | ❌ |
+| Ausgabestil | ✅ | ✅ | ❌ |
+| Denken | ✅ | ✅ | ❌ |
+| Workflow | ✅ | ❌ | ❌ |
+| SDK | ✅ | ✅ | ❌ |
+| ACP | ✅ | ✅ | ✅ |
 
 ## ⭐ Wichtige Funktionen
 * Unterstützung für 4 Betriebsmodi: yolo (Modell mit maximalen Berechtigungen, kann jede Operation ausführen), accepting edits (Modell nur mit Dateien-Bearbeitungsberechtigungen), plan mode (erst planen, dann ausführen), default (Modell ohne Berechtigungen)
 * Verbesserte subAgent-Funktionalität. Entwickelt die CLI von einem allgemeinen Assistenten zu einem Expertenteam weiter und bietet professionellere und genauere Beratung. Verwenden Sie /agent, um mehr vorkonfigurierte Agenten zu sehen
 * Verbessertes task-Tool. Effiziente Komprimierung der Kontextlänge, sodass die CLI Ihre Aufgaben tiefgreifender erledigen kann. Automatische Komprimierung wenn der Kontext 70% erreicht
-* Integration mit dem iFlow Open Market. Schnelle Installation nützlicher MCP-Tools, Subagents und benutzerdefinierter Anweisungen. Verwenden Sie /mcp für weitere Informationen
+* Integration mit dem iFlow Open Market. Schnelle Installation nützlicher MCP-Tools, Subagents, benutzerdefinierter Anweisungen und Workflows
 * Kostenlose Nutzung multimodaler Modelle, Sie können auch Bilder in die CLI einfügen (Strg+V zum Einfügen von Bildern)
 * Unterstützung für Gesprächsverlauf-Speicherung und Rollback (iflow --resume und /chat Befehle)
 * Unterstützung für mehr nützliche Terminal-Befehle (iflow -h für weitere Befehle)
@@ -98,6 +104,12 @@ iFlow bietet zwei Authentifizierungsoptionen:
 2. **Alternative**: Verbindung über OpenAI-kompatible APIs
 
 ![iFlow CLI Login](./assets/login.jpg)
+
+Wählen Sie Option 1 für die direkte Anmeldung, wodurch die iFlow-Kontoauthentifizierung in einer Webseite geöffnet wird. Nach Abschluss der Authentifizierung können Sie es kostenlos nutzen.
+
+![iFlow CLI Web Login](./assets/web-login.jpg)
+
+Wenn Sie sich in einer Umgebung wie einem Server befinden, wo Sie keine Webseite öffnen können, verwenden Sie Option 2 für die Anmeldung.
 
 So erhalten Sie Ihren API-Schlüssel:
 1. Registrieren Sie sich für ein iFlow-Konto

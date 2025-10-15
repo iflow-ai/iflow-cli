@@ -33,12 +33,18 @@ iFlow CLI es un potente asistente de IA que funciona directamente en tu terminal
 | Capacidad multimodal | ✅ | ⚠️ (Modelos chinos no soportados) | ⚠️ (Modelos chinos no soportados) |
 | Búsqueda | ✅ | ❌ | ⚠️ (VPN requerido) |
 | Gratuito | ✅ | ❌ | ⚠️ (Uso limitado) |
+| Hook | ✅ | ✅ | ❌ |
+| Estilo de salida | ✅ | ✅ | ❌ |
+| Pensamiento | ✅ | ✅ | ❌ |
+| Flujo de trabajo | ✅ | ❌ | ❌ |
+| SDK | ✅ | ✅ | ❌ |
+| ACP | ✅ | ✅ | ✅ |
 
 ## ⭐ Características Clave
 * Soporte para 4 modos de funcionamiento: yolo (modelo con máximos permisos, puede ejecutar cualquier operación), accepting edits (modelo solo con permisos de edición de archivos), plan mode (planificar primero luego ejecutar), default (modelo sin permisos)
 * Funcionalidad subAgent mejorada. Evoluciona la CLI de un asistente generalista a un equipo de expertos, proporcionándote consejos más profesionales y precisos. Usa /agent para ver más agentes preconfigurados
 * Herramienta task mejorada. Compresión eficiente de la longitud del contexto, permitiendo que la CLI complete tus tareas más profundamente. Compresión automática cuando el contexto alcanza el 70%
-* Integración con el mercado abierto iFlow. Instalación rápida de herramientas MCP útiles, Subagents e instrucciones personalizadas. Usa /mcp para saber más
+* Integración con el mercado abierto iFlow. Instalación rápida de herramientas MCP útiles, Subagents, instrucciones personalizadas y flujos de trabajo
 * Uso gratuito de modelos multimodales, también puedes pegar imágenes en la CLI (Ctrl+V para pegar imágenes)
 * Soporte para guardado y retroceso del historial de conversaciones (comandos iflow --resume y /chat)
 * Soporte para más comandos de terminal útiles (iflow -h para ver más comandos)
@@ -98,6 +104,12 @@ iFlow ofrece dos opciones de autenticación:
 2. **Alternativa**: Conectar a través de APIs compatibles con OpenAI
 
 ![iFlow CLI Login](./assets/login.jpg)
+
+Elige la opción 1 para iniciar sesión directamente, lo que abrirá la autenticación de cuenta iFlow en una página web. Después de completar la autenticación, puedes usarlo gratis.
+
+![iFlow CLI Web Login](./assets/web-login.jpg)
+
+Si estás en un entorno como un servidor donde no puedes abrir una página web, usa la opción 2 para iniciar sesión.
 
 Para obtener tu clave API:
 1. Regístrate para una cuenta de iFlow

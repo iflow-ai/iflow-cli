@@ -33,12 +33,19 @@ iFlow CLI is a powerful AI assistant that runs directly in your terminal. It sea
 | Multimodal Capability | ✅ | ⚠️ (Limited in China) | ⚠️ (Limited in China) |
 | Search | ✅ | ❌ | ⚠️ (Requires VPN) |
 | Free | ✅ | ❌ | ⚠️ (Limited Usage) |
+| Hook | ✅ | ✅ | ❌ |
+| Output Style | ✅ | ✅ | ❌ |
+| Thinking | ✅ | ✅ | ❌ |
+| Workflow | ✅ | ❌ | ❌ |
+| SDK | ✅ | ✅ | ❌ |
+| ACP | ✅ | ✅ | ✅ |
+
 
 ## ⭐ Key Features
 * Support 4 running modes: yolo (model has maximum permissions, can perform any operation), accepting edits (model only has file modification permissions), plan mode (plan first, then execute), default (model has no permissions)
 * Upgraded subAgent functionality: Transform CLI from general assistant to expert team, providing more professional and accurate advice. Use /agent to see more pre-configured agents
 * Upgraded task tool: Effectively compress context length, allowing CLI to complete your tasks more thoroughly. Auto-compression when context reaches 70%
-* Integrated with iFlow Open Market: Quickly install useful MCP tools, Subagents, and custom instructions. Use /mcp to learn more
+* Integrated with iFlow Open Market: Quickly install useful MCP tools, Subagents, custom instructions and workflows
 * Free multimodal model usage: You can also paste images in CLI now (Ctrl+V to paste images)
 * Support for conversation history saving and rollback (iflow --resume and /chat commands)
 * Support for more useful terminal commands (iflow -h to see more commands)
@@ -98,6 +105,12 @@ iFlow offers two authentication options:
 2. **Alternative**: Connect via OpenAI-compatible APIs
 
 ![iFlow CLI Login](./assets/login.jpg)
+
+Choose option 1 to login directly, which will open iFlow account authentication in a web page. After completing authentication, you can use it for free.
+
+![iFlow CLI Web Login](./assets/web-login.jpg)
+
+If you are in an environment like a server where you cannot open a web page, please use option 2 to login.
 
 To get your API key:
 1. Register for an iFlow account
