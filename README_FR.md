@@ -227,7 +227,7 @@ Voici un exemple de fichier de paramètres :
 
 ## 🔄 GitHub Actions
 
-Vous pouvez également utiliser iFlow CLI dans vos workflows GitHub Actions avec l'action maintenue par la communauté : [iflow-cli-action](https://github.com/vibe-ideas/iflow-cli-action)
+Vous pouvez également utiliser iFlow CLI dans vos workflows GitHub Actions avec l'action maintenue par la communauté : [iflow-cli-action](https://github.com/iflow-ai/iflow-cli-action)
 
 ## 👥 Communication Communautaire
 Si vous rencontrez des problèmes lors de l'utilisation, vous pouvez directement créer des Issues sur la page GitHub.

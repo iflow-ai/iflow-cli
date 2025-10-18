@@ -227,7 +227,7 @@ Aquí tienes un archivo de configuración de ejemplo:
 
 ## 🔄 GitHub Actions
 
-También puedes usar iFlow CLI en tus flujos de trabajo de GitHub Actions con la acción mantenida por la comunidad: [iflow-cli-action](https://github.com/vibe-ideas/iflow-cli-action)
+También puedes usar iFlow CLI en tus flujos de trabajo de GitHub Actions con la acción mantenida por la comunidad: [iflow-cli-action](https://github.com/iflow-ai/iflow-cli-action)
 
 ## 👥 Comunicación de la Comunidad
 Si encuentras problemas durante el uso, puedes crear Issues directamente en la página de GitHub.
