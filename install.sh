@@ -34,15 +34,15 @@ command_exists() {
 # Install uv
 install_uv() {
     local platform=$(uname -s)
-    
+
     if command_exists uv; then
         log_success "uv is already installed"
         log_info "uv version: $(uv --version 2>/dev/null || echo 'version info not available')"
         return 0
     fi
-    
+
     log_info "Installing uv..."
-    
+
     case "$platform" in
         Linux|Darwin)
             # MacOS/Linux installation
@@ -119,25 +119,25 @@ download_nvm_offline() {
     local OUT_DIR=${2:-"/tmp/nvm-offline-${VERSION}"}
     local PACKAGE_URL="https://cloud.iflow.cn/iflow-cli/nvm-${VERSION}.tar.gz"
     local TEMP_FILE="/tmp/nvm-${VERSION}.tar.gz"
-    
+
     log_info "Downloading nvm ${VERSION} package to ${OUT_DIR}"
     mkdir -p "${OUT_DIR}"
-    
+
     # Download nvm package from iflow cloud storage
     log_info "Downloading from: ${PACKAGE_URL}"
     if curl -sSL --connect-timeout 10 --max-time 60 "${PACKAGE_URL}" -o "${TEMP_FILE}"; then
         log_info "Package downloaded successfully, extracting..."
-        
+
         # Extract package to output directory
         if tar -xzf "${TEMP_FILE}" -C "${OUT_DIR}"; then
             # Clean up temporary file
             rm -f "${TEMP_FILE}"
-            
+
             # Make nvm-exec executable
             if [ -f "${OUT_DIR}/nvm-exec" ]; then
                 chmod +x "${OUT_DIR}/nvm-exec"
             fi
-            
+
             log_success "nvm downloaded and extracted successfully"
             return 0
         else
@@ -156,18 +156,18 @@ install_nvm() {
     local NVM_DIR="${NVM_DIR:-$HOME/.nvm}"
     local NVM_VERSION="${NVM_VERSION:-v0.40.3}"
     local TMP_OFFLINE_DIR="/tmp/nvm-offline-${NVM_VERSION}"
-    
+
     if [ -s "$NVM_DIR/nvm.sh" ]; then
         log_info "nvm is already installed at $NVM_DIR"
         return 0
     fi
-    
+
     # Download nvm
     if ! download_nvm_offline "${NVM_VERSION}" "${TMP_OFFLINE_DIR}"; then
         log_error "Failed to download nvm"
         return 1
     fi
-    
+
     # Install nvm
     log_info "Installing nvm to ${NVM_DIR}"
     mkdir -p "${NVM_DIR}"
@@ -176,16 +176,16 @@ install_nvm() {
         return 1
     }
     chmod +x "${NVM_DIR}/nvm-exec"
-    
+
     # Configure shell profile
     local PROFILE_FILE=$(get_shell_profile)
     local current_shell=$(basename "$SHELL")
-    
+
     # Create necessary directories for fish shell
     if [ "$current_shell" = "fish" ]; then
         mkdir -p "$(dirname "$PROFILE_FILE")"
     fi
-    
+
     # Add nvm to profile
     if [ "$current_shell" = "fish" ]; then
         # Fish shell 配置
@@ -195,7 +195,7 @@ set -gx NVM_DIR "'${NVM_DIR}'"
 if test -s "$NVM_DIR/nvm.sh"
     bass source "$NVM_DIR/nvm.sh"
 end'
-        
+
         if ! grep -q 'NVM_DIR' "${PROFILE_FILE}" 2>/dev/null; then
             # Check if bass is installed
             if ! fish -c "type -q bass" 2>/dev/null; then
@@ -214,16 +214,16 @@ end'
 export NVM_DIR="'${NVM_DIR}'"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"'
-        
+
         if ! grep -q 'NVM_DIR' "${PROFILE_FILE}" 2>/dev/null; then
             echo "${SOURCE_STR}" >> "${PROFILE_FILE}"
             log_info "Added nvm to ${PROFILE_FILE}"
         fi
     fi
-    
+
     # Clean up temporary files
     rm -rf "${TMP_OFFLINE_DIR}"
-    
+
     log_success "nvm installed successfully"
     return 0
 }
@@ -232,16 +232,16 @@ export NVM_DIR="'${NVM_DIR}'"
 install_nodejs_with_nvm() {
     local NODE_VERSION="${NODE_VERSION:-22}"
     local NVM_DIR="${NVM_DIR:-$HOME/.nvm}"
-    
+
     # Ensure nvm is loaded
     export NVM_DIR="${NVM_DIR}"
     [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-    
+
     if ! command_exists nvm; then
         log_error "nvm not loaded properly"
         return 1
     fi
-    
+
     # Check if xz needs to be installed
     if ! command_exists xz; then
         log_warning "xz not found, trying to install xz-utils..."
@@ -251,32 +251,32 @@ install_nodejs_with_nvm() {
             sudo apt-get update && sudo apt-get install -y xz-utils || log_warning "Failed to install xz, continuing anyway..."
         fi
     fi
-    
+
     # Set Node.js mirror source (for domestic network)
     export NVM_NODEJS_ORG_MIRROR="https://npmmirror.com/mirrors/node"
-    
+
     # Clear cache
     log_info "Clearing nvm cache..."
     nvm cache clear || true
-    
+
     # Install Node.js
     log_info "Installing Node.js v${NODE_VERSION}..."
     if nvm install ${NODE_VERSION}; then
         nvm alias default ${NODE_VERSION}
         nvm use default
         log_success "Node.js v${NODE_VERSION} installed successfully"
-        
+
         # Verify installation
         log_info "Node.js version: $(node -v)"
         log_info "npm version: $(npm -v)"
-        
+
         # Clean npm configuration conflicts
         clean_npmrc_conflict
-        
+
         # Configure npm mirror source
         npm config set registry https://registry.npmmirror.com
         log_info "npm registry set to npmmirror"
-        
+
         return 0
     else
         log_error "Failed to install Node.js"
@@ -284,48 +284,53 @@ install_nodejs_with_nvm() {
     fi
 }
 
-# Check Node.js version
+# Check Node.js version and exit if not satisfied
 check_node_version() {
     if ! command_exists node; then
-        return 1
+        log_error "Node.js is not installed!"
+        log_info "Please install Node.js version 20 or higher from: https://nodejs.org/"
+        log_info "Or use a Node.js version manager like nvm, fnm, or volta"
+        exit 1
     fi
-    
+
     local current_version=$(node -v | sed 's/v//')
     local major_version=$(echo $current_version | cut -d. -f1)
-    
+
     if [ "$major_version" -ge 20 ]; then
         log_success "Node.js v$current_version is already installed (>= 20)"
         return 0
     else
-        log_warning "Node.js v$current_version is installed but version < 20"
-        return 1
+        log_error "Node.js v$current_version is installed but version is too old (< 20)"
+        log_info "Please upgrade Node.js to version 20 or higher from: https://nodejs.org/"
+        log_info "Or use a Node.js version manager like nvm, fnm, or volta"
+        exit 1
     fi
 }
 
 # Install Node.js
 install_nodejs() {
     local platform=$(uname -s)
-    
+
     case "$platform" in
         Linux|Darwin)
             log_info "Installing Node.js on $platform..."
-            
+
             # Install nvm
             if ! install_nvm; then
                 log_error "Failed to install nvm"
                 return 1
             fi
-            
+
             # Load nvm
             export NVM_DIR="${HOME}/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-            
+
             # Install Node.js
             if ! install_nodejs_with_nvm; then
                 log_error "Failed to install Node.js"
                 return 1
             fi
-            
+
             ;;
         MINGW*|CYGWIN*|MSYS*)
             log_error "Windows platform detected. Please use Windows installer or WSL."
@@ -339,48 +344,44 @@ install_nodejs() {
     esac
 }
 
-# Check and update Node.js
-check_and_install_nodejs() {
-    if check_node_version; then
-        log_info "Using existing Node.js installation"
-        clean_npmrc_conflict
-    else
-        log_warning "Installing or upgrading Node.js..."
-        install_nodejs
-    fi
+# Check Node.js requirement (no longer installs automatically)
+check_nodejs_requirement() {
+    check_node_version
+    log_info "Using existing Node.js installation"
+    clean_npmrc_conflict
 }
 
 
 # Uninstall existing iFlow CLI
 uninstall_existing_iflow() {
     local platform=$(uname -s)
-    
+
     if command_exists iflow; then
         log_warning "Existing iFlow CLI installation detected"
-        
+
         # Try to get current version
         local current_version=$(iflow --version 2>/dev/null || echo "unknown")
         log_info "Current version: $current_version"
-        
+
         log_info "Uninstalling existing iFlow CLI..."
-        
+
         # Try npm uninstall first
         if npm uninstall -g @iflow-ai/iflow-cli 2>/dev/null; then
             log_success "Successfully uninstalled existing iFlow CLI via npm"
         else
             log_warning "Could not uninstall via npm, trying to remove manually..."
-            
+
             case "$platform" in
                 MINGW*|CYGWIN*|MSYS*)
                     # Windows platform
                     local npm_prefix=$(npm config get prefix 2>/dev/null || echo "%APPDATA%\\npm")
                     local bin_path="$npm_prefix/iflow.cmd"
-                    
+
                     # Remove iflow binary if exists
                     if [ -f "$bin_path" ]; then
                         rm -f "$bin_path" && log_info "Removed $bin_path"
                     fi
-                    
+
                     # Remove from common Windows locations
                     local common_paths=(
                         "$npm_prefix/iflow"
@@ -392,12 +393,12 @@ uninstall_existing_iflow() {
                     # Unix-like platforms (Linux/macOS)
                     local npm_prefix=$(npm config get prefix 2>/dev/null || echo "$HOME/.npm-global")
                     local bin_path="$npm_prefix/bin/iflow"
-                    
+
                     # Remove iflow binary if exists
                     if [ -f "$bin_path" ]; then
                         rm -f "$bin_path" && log_info "Removed $bin_path"
                     fi
-                    
+
                     # Remove from common Unix locations
                     local common_paths=(
                         "/usr/local/bin/iflow"
@@ -406,18 +407,18 @@ uninstall_existing_iflow() {
                     )
                     ;;
             esac
-            
+
             for path in "${common_paths[@]}"; do
                 if [ -f "$path" ]; then
                     rm -f "$path" && log_info "Removed $path"
                 fi
             done
         fi
-        
+
         # Verify uninstallation
         if command_exists iflow; then
             log_warning "iFlow CLI still exists after uninstall attempt. Attempting to locate and remove it..."
-            
+
             # Find the iflow executable
             local iflow_path=$(which iflow 2>/dev/null)
             if [ -n "$iflow_path" ] && [ -f "$iflow_path" ]; then
@@ -430,7 +431,7 @@ uninstall_existing_iflow() {
             else
                 log_warning "Could not locate iflow executable path"
             fi
-            
+
             # Check again after removal attempt
             if command_exists iflow; then
                 log_warning "iFlow CLI still exists after manual removal. Continuing with installation..."
@@ -447,23 +448,33 @@ uninstall_existing_iflow() {
 install_iFlow_cli() {
     # Uninstall existing installation first
     uninstall_existing_iflow
-    
+
     log_info "Installing iFlow CLI..."
-    
-    # Install iFlow CLI
+
+    # Try to install iFlow CLI, handle permission issues
     if npm i -g @iflow-ai/iflow-cli@latest; then
         log_success "iFlow CLI installed successfully!"
-        
-        # Verify installation
-        if command_exists iflow; then
-            log_info "iFlow CLI version: $(iflow --version 2>/dev/null || echo 'version info not available')"
-        else
-            log_warning "iFlow CLI installed but command not found. You may need to reload your shell or add npm global bin to PATH."
-            log_info "Try running: export PATH=\"\$PATH:$(npm config get prefix)/bin\""
-        fi
+    elif sudo npm i -g @iflow-ai/iflow-cli@latest 2>/dev/null; then
+        log_success "iFlow CLI installed successfully with sudo!"
     else
-        log_error "Failed to install iFlow CLI!"
+        log_error "Failed to install iFlow CLI due to permission issues!"
+        log_info "Please try one of the following solutions:"
+        log_info "1. Run the script with sudo: sudo ./install.sh"
+        log_info "2. Configure npm to use a user directory:"
+        log_info "   mkdir -p ~/.npm-global"
+        log_info "   npm config set prefix '~/.npm-global'"
+        log_info "   export PATH=~/.npm-global/bin:\$PATH"
+        log_info "   echo 'export PATH=~/.npm-global/bin:\$PATH' >> ~/.bashrc"
+        log_info "   Then run the script again"
         exit 1
+    fi
+
+    # Verify installation
+    if command_exists iflow; then
+        log_info "iFlow CLI version: $(iflow --version 2>/dev/null || echo 'version info not available')"
+    else
+        log_warning "iFlow CLI installed but command not found. You may need to reload your shell or add npm global bin to PATH."
+        log_info "Try running: export PATH=\"\$PATH:$(npm config get prefix)/bin\""
     fi
 }
 
@@ -471,46 +482,54 @@ install_iFlow_cli() {
 main() {
     echo "=========================================="
     echo "   iFlow CLI Installation Script"
-    echo "   Optimized for Development Machines"
     echo "=========================================="
     echo ""
-    
-    # Check system
-    log_info "System: $(uname -s) $(uname -r)"
+
+    # Check system platform first
+    local platform=$(uname -s)
+    log_info "System: $platform $(uname -r)"
     log_info "Shell: $(basename "$SHELL")"
+
+    # Check if Windows platform and exit
+    case "$platform" in
+        MINGW*|CYGWIN*|MSYS*)
+            log_error "Windows platform detected!"
+            log_info "Please visit the iFlow CLI official website for Windows installation instructions:"
+            log_info "https://platform.iflow.cn/cli/quickstart"
+            exit 1
+            ;;
+    esac
+
     if is_dev_machine; then
         log_info "Development machine environment detected"
     fi
-    
-    # Install uv first (continue even if it fails)
-    install_uv || log_warning "UV installation failed, but continuing with the rest of the installation..."
-    
-    # Check and install Node.js
-    check_and_install_nodejs
-    
+
+    # Check Node.js requirement (exit if not satisfied)
+    check_nodejs_requirement
+
     # Ensure npm command is available
     if ! command_exists npm; then
-        log_error "npm command not found after Node.js installation!"
-        log_info "Please run: source $(get_shell_profile)"
+        log_error "npm command not found!"
+        log_info "Please ensure Node.js and npm are properly installed and available in PATH"
         exit 1
     fi
-    
+
     # Install iFlow CLI
     install_iFlow_cli
-    
+
     echo ""
     echo "=========================================="
     log_success "Installation completed successfully!"
     echo "=========================================="
     echo ""
-    
+
     log_info "To start using iFlow CLI, run:"
     local current_shell=$(basename "$SHELL")
     case "$current_shell" in
         bash)
             echo "  source ~/.bashrc"
             ;;
-        zsh) 
+        zsh)
             echo "  source ~/.zshrc"
             ;;
         fish)
@@ -522,7 +541,7 @@ main() {
     esac
     echo "  iflow"
     echo ""
-    
+
     # Try to run iFlow CLI
     if command_exists iflow; then
         log_info "Starting iFlow CLI..."
@@ -531,9 +550,9 @@ main() {
         log_info "Please reload your shell and run 'iflow' command."
     fi
 }
- 
+
 # Error handling
 trap 'log_error "An error occurred. Installation aborted."; exit 1' ERR
- 
+
 # Run main function
 main
