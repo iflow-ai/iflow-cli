@@ -230,6 +230,12 @@ Here is a settings demo file:
 
 You can also use iFlow CLI in your GitHub Actions workflows with the community-maintained action: [iflow-cli-action](https://github.com/iflow-ai/iflow-cli-action)
 
+## 🖥️ Graphical Interface
+
+Looking for a graphical interface?
+
+- [**AionUi**](https://github.com/iOfficeAI/AionUi) A modern GUI for command-line AI tools including iFlow CLI
+
 ## 👥 Community Communication
 If you encounter problems in use, you can directly raise Issues on the github page.
 
