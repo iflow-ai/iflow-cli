@@ -52,6 +52,10 @@ iFlow CLI is a terminal-based AI assistant that can analyze code, execute progra
 
 **macOS/Linux**
 ```shell
+# Homebrew installation
+brew tap iflow-ai/iflow-cli
+brew install iflow-cli
+
 # One-click installation script that installs all required dependencies
 bash -c "$(curl -fsSL https://gitee.com/iflow-ai/iflow-cli/raw/main/install.sh)"
 
