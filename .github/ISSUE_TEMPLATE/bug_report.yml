@@ -5,7 +5,11 @@ body:
   - type: markdown
     attributes:
       value: |
-        > [!IMPORTANT]  
+        > [!CAUTION]
+        > iFlow CLI is shutting down on April 17, 2026 (UTC+8). No new features or bug fixes will be released.
+        > See our [farewell post](https://vibex.iflow.cn/t/topic/4819) for details.
+
+        > [!IMPORTANT]
         > Thanks for taking the time to fill out this bug report!
         >
         > Please search **[existing issues](https://github.com/iflow-ai/iflow-cli/issues)** to see if an issue already exists for the bug you encountered.

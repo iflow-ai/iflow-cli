@@ -1,3 +1,8 @@
+> [!IMPORTANT]
+> **iFlow CLI прекратит работу 17 апреля 2026 года (UTC+8).** Спасибо, что держали iFlow CLI в своём терминале. Подробности и руководство по миграции — в нашем [прощальном посте](https://vibex.iflow.cn/t/topic/4819).
+
+---
+
 # 🤖 iFlow CLI
 
 [![Упомянуто в Awesome Gemini CLI](https://awesome.re/mentioned-badge.svg)](https://github.com/Piebald-AI/awesome-gemini-cli)

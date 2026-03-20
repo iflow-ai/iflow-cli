@@ -1,3 +1,8 @@
+> [!IMPORTANT]
+> **iFlow CLI 将于 2026 年 4 月 17 日（北京时间）正式停止服务。** 感谢每一位把 iFlow CLI 留在终端里的你。详情与迁移指引请见[告别帖](https://vibex.iflow.cn/t/topic/4819)。
+
+---
+
 # 🤖 iFlow CLI
 
 [![入选 Awesome Gemini CLI](https://awesome.re/mentioned-badge.svg)](https://github.com/Piebald-AI/awesome-gemini-cli)
